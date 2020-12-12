@@ -60,11 +60,6 @@
   :group 'org-pomodoro
   :type 'boolean)
 
-(defcustom org-pomodoro-play-sounds t
-  "Determines whether sounds are played or not."
-  :group 'org-pomodoro
-  :type 'boolean)
-
 (defcustom org-pomodoro-manual-break nil
   "Whether the user needs to exit manually from a running pomodoro to enter a break.
 
@@ -91,164 +86,15 @@ finishes the pomodoro and enters the break period."
   :group 'org-pomodoro
   :type 'string)
 
-
-(defcustom org-pomodoro-audio-player (or (executable-find "aplay")
-                                         (executable-find "afplay"))
-  "Music player used to play sounds."
+(defcustom org-pomodoro-notify-send-path (executable-find "notify-send")
+  "Path of the notify-send executable."
   :group 'org-pomodoro
   :type 'string)
-
-;;; POMODORO START SOUND
-(defcustom org-pomodoro-start-sound-p nil
-  "Determines whether to play a sound when a pomodoro started.
-
-Use `org-pomodoro-start-sound' to determine what sound that should be."
-  :group 'org-pomodoro
-  :type 'boolean)
-
-(defcustom org-pomodoro-start-sound (when load-file-name
-                                      (concat (file-name-directory load-file-name)
-                                              "resources/bell.wav"))
-  "The path to a sound file that´s to be played when a pomodoro is started."
-  :group 'org-pomodoro
-  :type 'file)
-
-(defcustom org-pomodoro-start-sound-args nil
-  "Arguments used when playing the `org-pomodoro-start-sound'."
-  :group 'org-pomodoro
-  :type 'string)
-
-
-;;; POMODORO FINISHED SOUND
-(defcustom org-pomodoro-finished-sound-p t
-  "Determines whether to play a sound when a pomodoro finished.
-
-Use `org-pomodoro-finished-sound' to determine what sound that should be."
-  :group 'org-pomodoro
-  :type 'boolean)
-
-(defcustom org-pomodoro-finished-sound (when load-file-name
-                                         (concat (file-name-directory load-file-name)
-                                                 "resources/bell.wav"))
-  "The path to a sound file that´s to be played when a pomodoro was finished."
-  :group 'org-pomodoro
-  :type 'file)
-
-(defcustom org-pomodoro-finished-sound-args nil
-  "Arguments used when playing the `org-pomodoro-finished-sound'."
-  :group 'org-pomodoro
-  :type 'string)
-
-;;; POMODORO OVERTIME SOUND
-(defcustom org-pomodoro-overtime-sound-p t
-  "Determines whether to play a sound when a pomodoro starts to run overtime.
-
-Use `org-pomodoro-overtime-sound' to determine what sound that should be."
-  :group 'org-pomodoro
-  :type 'boolean)
-
-(defcustom org-pomodoro-overtime-sound (when load-file-name
-                                         (concat (file-name-directory load-file-name)
-                                                 "resources/bell.wav"))
-  "The path to a sound file that´s to be played when a pomodoro runs overtime."
-  :group 'org-pomodoro
-  :type 'file)
-
-(defcustom org-pomodoro-overtime-sound-args nil
-  "Arguments used when playing the `org-pomodoro-overtime-sound'."
-  :group 'org-pomodoro
-  :type 'string)
-
-;;; POMODORO KILLED SOUND
-(defcustom org-pomodoro-killed-sound-p nil
-  "Determines whether to play a sound when a pomodoro killed.
-
-Use `org-pomodoro-killed-sound' to determine what sound that should be."
-  :group 'org-pomodoro
-  :type 'boolean)
-
-(defcustom org-pomodoro-killed-sound nil
-  "The path to a sound file, that´s to be played when a pomodoro is killed."
-  :group 'org-pomodoro
-  :type 'file)
-
-(defcustom org-pomodoro-killed-sound-args nil
-  "Arguments used when playing the `org-pomodoro-killed-sound'."
-  :group 'org-pomodoro
-  :type 'string)
-
-;;; POMODORO SHORT-BREAK SOUND
-(defcustom org-pomodoro-short-break-sound-p t
-  "Determines whether to play a sound when a short-break finished.
-
-Use `org-pomodoro-short-break-sound' to determine what sound that should be."
-  :group 'org-pomodoro
-  :type 'boolean)
 
 (defcustom org-pomodoro-clock-break nil
   "When t, also clocks time during breaks."
   :group 'org-pomodoro
   :type 'boolean)
-
-(defcustom org-pomodoro-short-break-sound (when load-file-name
-                                            (concat (file-name-directory load-file-name)
-                                                    "resources/bell.wav"))
-  "The path to a sound file that´s to be played when a break was finished."
-  :group 'org-pomodoro
-  :type 'file)
-
-(defcustom org-pomodoro-short-break-sound-args nil
-  "Arguments used when playing the `org-pomodoro-short-break-sound'."
-  :group 'org-pomodoro
-  :type 'string)
-
-;;; POMODORO LONG-BREAK SOUND
-(defcustom org-pomodoro-long-break-sound-p t
-  "Determines whether to play a sound when a long-break finished.
-
-Use `org-pomodoro-long-break-sound' to determine what sound that should be."
-  :group 'org-pomodoro
-  :type 'boolean)
-
-(defcustom org-pomodoro-long-break-sound (when load-file-name
-                                           (concat (file-name-directory load-file-name)
-                                                   "resources/bell_multiple.wav"))
-  "The path to a sound file that´s to be played when a long break is finished."
-  :group 'org-pomodoro
-  :type 'file)
-
-(defcustom org-pomodoro-long-break-sound-args nil
-  "Arguments used when playing the `org-pomodoro-long-break-sound'."
-  :group 'org-pomodoro
-  :type 'string)
-
-;;; POMODORO TICKING SOUND
-(defcustom org-pomodoro-ticking-sound-p nil
-  "Determines whether ticking sounds are played or not."
-  :group 'org-pomodoro
-  :type 'boolean)
-
-(defcustom org-pomodoro-ticking-sound (when load-file-name
-                                        (concat (file-name-directory load-file-name)
-                                                "resources/tick.wav"))
-  "The path to a sound file that´s to be played while a pomodoro is running."
-  :group 'org-pomodoro
-  :type 'file)
-
-(defcustom org-pomodoro-ticking-sound-args nil
-  "Arguments used when playing the `org-pomodoro-ticking-sound'."
-  :group 'org-pomodoro
-  :type 'string)
-
-(defcustom org-pomodoro-ticking-sound-states '(:pomodoro :short-break :long-break)
-  "The states in which to play ticking sounds."
-  :group 'org-pomodoro
-  :type 'list)
-
-(defcustom org-pomodoro-ticking-frequency 1
-  "The frequency at which to playback the ticking sound."
-  :group 'org-pomodoro
-  :type 'list)
 
 ;;; OVERTIME VALUES
 (defcustom org-pomodoro-overtime-format "+%s"
@@ -366,68 +212,19 @@ or :break when starting a break.")
   (not (eq org-pomodoro-state :none)))
 
 (defun org-pomodoro-expires-p ()
-  "Return true when the last clock-in was more than `org-pomodoro-expiry-time`."
+  "Return non-nil when the last clock-in was more than `org-pomodoro-expiry-time`."
   (let ((delta-minutes (/ (float-time (time-subtract (current-time) org-pomodoro-last-clock-in)) 60)))
     (> delta-minutes org-pomodoro-expiry-time)))
 
-(defun org-pomodoro-sound-p (type)
-  "Return whether to play sound of given TYPE."
-  (cl-case type
-    (:start org-pomodoro-start-sound-p)
-    (:pomodoro org-pomodoro-finished-sound-p)
-    (:overtime org-pomodoro-overtime-sound-p)
-    (:killed org-pomodoro-killed-sound-p)
-    (:short-break org-pomodoro-short-break-sound-p)
-    (:long-break org-pomodoro-long-break-sound-p)
-    (:tick org-pomodoro-ticking-sound-p)
-    (t (error "Unknown org-pomodoro sound: %S" type))))
-
-(defun org-pomodoro-sound (type)
-  "Return the sound file for given TYPE."
-  (cl-case type
-    (:start org-pomodoro-start-sound)
-    (:pomodoro org-pomodoro-finished-sound)
-    (:overtime org-pomodoro-overtime-sound)
-    (:killed org-pomodoro-killed-sound)
-    (:short-break org-pomodoro-short-break-sound)
-    (:long-break org-pomodoro-long-break-sound)
-    (:tick org-pomodoro-ticking-sound)
-    (t (error "Unknown org-pomodoro sound: %S" type))))
-
-(defun org-pomodoro-sound-args (type)
-  "Return the playback arguments for given TYPE."
-  (cl-case type
-    (:start org-pomodoro-start-sound-args)
-    (:pomodoro org-pomodoro-finished-sound-args)
-    (:overtime org-pomodoro-overtime-sound-args)
-    (:killed org-pomodoro-killed-sound-args)
-    (:short-break org-pomodoro-short-break-sound-args)
-    (:long-break org-pomodoro-long-break-sound-args)
-    (:tick org-pomodoro-ticking-sound-args)
-    (t (error "Unknown org-pomodoro sound: %S" type))))
-
-(defun org-pomodoro-play-sound (type)
-  "Play an audio file specified by TYPE (:pomodoro, :short-break, :long-break)."
-  (let ((sound (org-pomodoro-sound type))
-        (args (org-pomodoro-sound-args type)))
-    (cond ((and (fboundp 'sound-wav-play)
-		org-pomodoro-play-sounds
-		sound)
-	   (sound-wav-play sound))
-	  ((and org-pomodoro-audio-player
-		org-pomodoro-play-sounds
-		sound)
-	   (start-process-shell-command
-	    "org-pomodoro-audio-player" nil
-	    (mapconcat 'identity
-		       `(,org-pomodoro-audio-player
-			 ,@(delq nil (list args (shell-quote-argument (expand-file-name sound)))))
-		       " "))))))
-
-(defun org-pomodoro-maybe-play-sound (type)
-  "Play an audio file specified by TYPE."
-  (when (org-pomodoro-sound-p type)
-    (org-pomodoro-play-sound type)))
+(defun org-pomodoro-notify-send (type)
+  "Send a notification specified by TYPE (:pomodoro, :short-break, :long-break)."
+  (when org-pomodoro-notify-send-path
+    (start-process
+     "org-pomodoro-notify-send" nil
+     org-pomodoro-notify-send-path
+     "-t"
+     "60000"
+     (format "org-pomodoro: %s" type))))
 
 (defun org-pomodoro-remaining-seconds ()
   "Return the number of seconds remaining in the current phase as a float.
@@ -435,8 +232,7 @@ Negative if the current phase is over."
  (float-time (time-subtract org-pomodoro-end-time (current-time))))
 
 (defun org-pomodoro-format-seconds ()
-  "Format the time remaining in the current phase with the format specified in
-org-pomodoro-time-format."
+  "Format the time remaining in the current phase with the format specified in org-pomodoro-time-format."
   (format-seconds org-pomodoro-time-format
                   (if (eq org-pomodoro-state :overtime)
                       (- (org-pomodoro-remaining-seconds))
@@ -483,12 +279,7 @@ invokes the handlers for finishing."
         (:short-break (org-pomodoro-short-break-finished))
         (:long-break (org-pomodoro-long-break-finished))))
     (run-hooks 'org-pomodoro-tick-hook)
-    (org-pomodoro-update-mode-line)
-    (when (and (member org-pomodoro-state org-pomodoro-ticking-sound-states)
-               (equal (mod (truncate (org-pomodoro-remaining-seconds))
-                           org-pomodoro-ticking-frequency)
-                      0))
-      (org-pomodoro-maybe-play-sound :tick))))
+    (org-pomodoro-update-mode-line)))
 
 (defun org-pomodoro-set (state)
   "Set the org-pomodoro STATE."
@@ -515,7 +306,7 @@ The argument STATE is optional.  The default state is `:pomodoro`."
   (org-pomodoro-set (or state :pomodoro))
 
   (when (eq org-pomodoro-state :pomodoro)
-    (org-pomodoro-maybe-play-sound :start)
+     (org-pomodoro-notify-send :start)
     (run-hooks 'org-pomodoro-started-hook))
   (org-pomodoro-update-mode-line)
   (org-agenda-maybe-redo))
@@ -538,7 +329,7 @@ The argument STATE is optional.  The default state is `:pomodoro`."
 (defun org-pomodoro-overtime ()
   "Is invoked when the time for a pomodoro runs out.
 Notify the user that the pomodoro should be finished by calling ‘org-pomodoro’"
-  (org-pomodoro-maybe-play-sound :overtime)
+   (org-pomodoro-notify-send :overtime)
   (org-pomodoro-notify "Pomodoro completed. Now on overtime!" "Start break by calling ‘org-pomodoro’")
   (org-pomodoro-start :overtime)
   (org-pomodoro-update-mode-line)
@@ -549,7 +340,7 @@ Notify the user that the pomodoro should be finished by calling ‘org-pomodoro�
 This may send a notification, play a sound and start a pomodoro break."
   (unless org-pomodoro-clock-break
       (org-clock-out nil t))
-  (org-pomodoro-maybe-play-sound :pomodoro)
+   (org-pomodoro-notify-send :pomodoro)
   (setq org-pomodoro-count (+ org-pomodoro-count 1))
   (if (zerop (mod org-pomodoro-count org-pomodoro-long-break-frequency))
       (org-pomodoro-start :long-break)
@@ -577,7 +368,7 @@ This may send a notification and play a sound."
     (org-clock-out nil t))
   (org-pomodoro-reset)
   (org-pomodoro-notify "Short break finished." "Ready for another pomodoro?")
-  (org-pomodoro-maybe-play-sound :short-break)
+   (org-pomodoro-notify-send :short-break)
   (run-hooks 'org-pomodoro-break-finished-hook 'org-pomodoro-short-break-finished-hook))
 
 (defun org-pomodoro-long-break-finished ()
@@ -587,7 +378,7 @@ This may send a notification and play a sound."
     (org-clock-out nil t))
   (org-pomodoro-reset)
   (org-pomodoro-notify "Long break finished." "Ready for another pomodoro?")
-  (org-pomodoro-maybe-play-sound :long-break)
+   (org-pomodoro-notify-send :long-break)
   (run-hooks 'org-pomodoro-break-finished-hook 'org-pomodoro-long-break-finished-hook))
 
 (defun org-pomodoro-extend-last-clock ()
